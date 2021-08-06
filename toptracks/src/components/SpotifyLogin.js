@@ -6,12 +6,18 @@ const AUTH_URL =
 export default function SpotifyLogin() {
   return (
     <Container
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex flex-column justify-content-center align-items-center"
       style={{ minHeight: "100vh" }}
     >
-      <a className="btn btn-success btn-lg" href={AUTH_URL}>
+      <h1 className="py-3">SpTopify</h1>
+      <h5 className="py-3">
+        Discover the top 50 popular tracks an Artist has on Spotify!
+      </h5>
+      <h6 className="py-3">Login to Spotify below to begin</h6>
+      <a className="btn btn-success btn-lg " href={AUTH_URL}>
         Login
       </a>
+      <h7 className="py-3">Developed by Nick Janita using Spotify Web API</h7>
     </Container>
   );
 }

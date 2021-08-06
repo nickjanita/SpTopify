@@ -55,6 +55,7 @@ export default function Dashboard({ code }) {
   }, [accessToken]);
 
   useEffect(() => {
+    setTrackResults([]);
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
 
