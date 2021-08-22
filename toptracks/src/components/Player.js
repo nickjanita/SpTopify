@@ -1,7 +1,7 @@
 import React from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import { useState, useEffect } from "react";
-export default function Player({ accessToken, trackUri }) {
+export default function Player({ accessToken, trackUri, spotifyApi }) {
   const [play, setPlay] = useState(false);
   useEffect(() => setPlay(true), [trackUri]);
   if (!accessToken) return null;
@@ -15,6 +15,15 @@ export default function Player({ accessToken, trackUri }) {
       }}
       play={play}
       uris={trackUri ? [trackUri] : []}
+      styles={{
+        loaderSize: 1,
+        sliderHeight: 3,
+        sliderHandleBorderRadius: 4,
+        sliderColor: "#1cb954",
+        trackArtistColor: "#ccc",
+        sliderTrackColor: "#ccc",
+        trackNameColor: "#fff",
+      }}
     />
   );
 }

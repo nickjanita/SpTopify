@@ -1,0 +1,55 @@
+.fa {
+  font-family: FontAwesome !important;
+}
+#tracks {
+  border-radius: 0.5rem;
+}
+#album-art {
+  border-radius: 0.5rem;
+}
+#tracks:hover {
+  background-color: rgb(179, 172, 172);
+  transition: background-color 200ms linear;
+}
+#tracks:hover * {
+  color: red;
+  background-color: rgb(179, 172, 172);
+  transition: background-color 200ms linear;
+}
+#playlist-button {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+#playlist-button:hover {
+  outline: none;
+}
+#playlist-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+#playlist {
+  display: flex;
+  align-items: center;
+}
+#popover-basic {
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
+#popover-title {
+  background-color: rgb(39, 39, 39);
+}
+#playlist:hover {
+  background-color: rgb(179, 172, 172);
+  transition: background-color 200ms linear;
+}
+#playlist:hover * {
+  color: red;
+  background-color: rgb(179, 172, 172);
+  transition: background-color 200ms linear;
+}
+
+#toast {
+  position: absolute;
+  top: 0.5%;
+  left: 40%;
+}
