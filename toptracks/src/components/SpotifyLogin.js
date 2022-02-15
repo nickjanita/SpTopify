@@ -8,7 +8,7 @@ const AUTH_URL =
 export default function SpotifyLogin() {
   return (
     <div>
-      <div id="particles">
+      <div id="particles" style={{ maxHeight: "100vh" }}>
         <Particles></Particles>
       </div>
 

@@ -1,11 +1,12 @@
 import React from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import { useState, useEffect } from "react";
-export default function Player({ accessToken, trackUri, spotifyApi }) {
+export default function Player({ accessToken, trackUri }) {
   const [play, setPlay] = useState(false);
   useEffect(() => setPlay(true), [trackUri]);
   if (!accessToken) return null;
 
+  //Builds Player component
   return (
     <SpotifyPlayer
       token={accessToken}

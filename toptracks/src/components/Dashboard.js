@@ -18,16 +18,16 @@ export default function Dashboard({ code }) {
   const [trackResults, setTrackResults] = useState([]);
   const [playlistResults, setPlaylistResults] = useState([]);
   const [playingTrack, setPlayingTrack] = useState([]);
-  var playlists = [];
 
   function chooseTrack(track) {
     setPlayingTrack(track);
     setSearch("");
   }
+
+  //Add song to playlist
   function addToPlaylist(track, playlist) {
-    //console.log(track.uri);
     spotifyApi.addTracksToPlaylist(playlist.id, [track.uri]).then(
-      function (data) {
+      function () {
         console.log("Added tracks to playlist!");
       },
       function (err) {
@@ -35,13 +35,13 @@ export default function Dashboard({ code }) {
       }
     );
   }
+
+  //Fetches user playlist Data
   function getPlaylists() {
     spotifyApi.getUserPlaylists().then((res) => {
       setPlaylistResults(
-        // console.log(res.body.items[0].name)
         res.body.items.map((playlist) => {
-          //console.log(playlist);
-          var playlistImage = "";
+          let playlistImage = "";
           try {
             playlistImage = playlist.images[0].url;
           } catch (err) {
@@ -56,19 +56,18 @@ export default function Dashboard({ code }) {
       );
     });
   }
+
   //Handling artist top tracks
   function getArtistTracks(artistName) {
     setSearch("");
-    getPlaylists();
     spotifyApi
       .searchTracks("artist:" + artistName, { limit: 50 })
       .then((res) => {
-        var songCount = 0;
+        let songCount = 0;
         setTrackResults(
           res.body.tracks.items.map((track) => {
             songCount = songCount + 1;
-            var trackImage = "";
-            console.log(track);
+            let trackImage = "";
             try {
               trackImage = track.album.images[2].url;
             } catch (err) {
@@ -88,45 +87,38 @@ export default function Dashboard({ code }) {
       });
   }
 
-  //Set access token
+  //Set access token and get playlists, only on accessToken change
   useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
+    getPlaylists();
   }, [accessToken]);
 
-  //Artist Search
+  //Artist Search, only on search or accessToken change
   useEffect(() => {
     setTrackResults([]);
     if (!search) return setSearchResults([]);
     if (!accessToken) return;
-
-    let cancel = false;
-    (async () => {
-      let res = await spotifyApi.searchArtists(search);
-      //console.log(res.body);
+    spotifyApi.searchArtists(search).then((res) => {
       setSearchResults(
         res.body.artists.items.map((artist) => {
-          //console.log(artist);
-
-          var artistImage = "";
+          let artistImage = "";
           try {
             artistImage = artist.images[0].url;
           } catch (err) {
             console.log("No image");
           }
-          //console.log(artist);
           return {
             name: artist.name,
-            id: artist.id,
-            artistUrl: artistImage,
+            artistImage: artistImage,
           };
         })
       );
-    })();
+    });
   }, [search, accessToken]);
+
   return (
     <div>
-      {" "}
       <Container
         className="d-flex flex-column py-2"
         style={{ height: "100vh" }}
@@ -158,7 +150,6 @@ export default function Dashboard({ code }) {
           <Player
             accessToken={accessToken}
             trackUri={playingTrack?.uri}
-            spotifyApi={spotifyApi}
           ></Player>
         </div>
       </Container>

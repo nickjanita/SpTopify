@@ -12,13 +12,11 @@ export default function TrackSearchResult({
   playlists,
   addToPlaylist,
 }) {
-  //const [playlistResults, setPlaylistResults] = useState([]);
   const [show, setShow] = useState(false);
   function handlePlay() {
     chooseTrack(track);
   }
   function handleAddToPlaylist(playlist, event) {
-    //console.log(event);
     addToPlaylist(track, playlist);
   }
   const PlaylistToast = () => (
@@ -96,7 +94,6 @@ export default function TrackSearchResult({
           </div>
           <div className="text-muted">{track.albumName}</div>
           <div className="text-muted">{"Released: " + track.release}</div>
-          {/* <div className="text-muted">{track.artist}</div> */}
         </div>
         <div id="playlist-button">
           {" "}

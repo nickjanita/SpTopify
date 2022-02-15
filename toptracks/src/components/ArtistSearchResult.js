@@ -10,10 +10,9 @@ export default function ArtistSearchResult({ artist, getArtistTracks }) {
       style={{ cursor: "pointer" }}
       onClick={handleClick}
     >
-      <img src={artist.artistUrl} style={{ height: "64px", width: "64px" }} />
+      <img src={artist.artistImage} style={{ height: "64px", width: "64px" }} />
       <div className="m-3">
         <div>{artist.name}</div>
-        {/* <div className="text-muted">{track.artist}</div> */}
       </div>
     </div>
   );
